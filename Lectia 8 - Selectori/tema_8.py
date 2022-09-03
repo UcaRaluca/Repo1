@@ -3,11 +3,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 s = Service(ChromeDriverManager().install())
 chrome = webdriver.Chrome(service=s)
-
-# test
 
 
 # Test ID
@@ -98,6 +98,8 @@ chrome = webdriver.Chrome(service=s)
 
 # Test Tag
 # chrome.get('https://www.techlistic.com/p/selenium-practice-form.html')
+# WebDriverWait(chrome, 10).until(EC.presence_of_element_located((By.ID, "ez-accept-all"))).click()
+# WebDriverWait(chrome, 10).until(EC.presence_of_element_located((By.ID, "cookieChoiceDismiss"))).click()
 # sleep(3)
 # lista_taguri=chrome.find_elements(By.TAG_NAME,'input')
 # print(len(lista_taguri))
@@ -143,6 +145,8 @@ chrome = webdriver.Chrome(service=s)
 
 # # 2
 # chrome.get('https://www.techlistic.com/p/selenium-practice-form.html')
+# WebDriverWait(chrome, 10).until(EC.presence_of_element_located((By.ID, "ez-accept-all"))).click()
+# WebDriverWait(chrome, 10).until(EC.presence_of_element_located((By.ID, "cookieChoiceDismiss"))).click()
 # sleep(3)
 # # <input id="sex-1" name="sex" style="font-size: 14px; margin-left: 0px; margin-right: 0px; margin-top: 0px; padding: 0px; vertical-align: baseline;" type="radio" value="Female">
 # chrome.find_element(By.CSS_SELECTOR,'input#sex-1').click()
@@ -155,29 +159,84 @@ chrome = webdriver.Chrome(service=s)
 # chrome.find_element(By.CSS_SELECTOR,'input.form-control').send_keys('cucu@gmail.com')
 # sleep(3)
 
-# Test XPATH
+# # Test XPATH
 # chrome.get('http://automationpractice.com/index.php')
 # sleep(3)
-# # /html/body/div/div[1]/header/div[3]/div/div/div[2]/form/input[4]
-# # //*[@id="search_query_top"]
-# chrome.find_element(By.XPATH,' //*[@id="search_query_top"]').send_keys('dress')
+# chrome.find_element(By.XPATH,"//*[@id='search_query_top']").send_keys("Blouse")
 # sleep(3)
 
 
 # chrome.get('https://www.phptravels.net/')
 # sleep(3)
-# # # //*[@id="select2-hotels_city-container"]
-# # chrome.find_element(By.XPATH,'//span[@id="select2-hotels_city-container"]').click()
-# # sleep(3)
+# oras=chrome.find_element(By.XPATH,'(//span[@id="select2-hotels_city-container"])[1]')
+# sleep(3)
+# oras.click()
+# sleep(3)
+
+
+# chrome.get('https://formy-project.herokuapp.com/autocomplete')
+# chrome.find_element(By.XPATH,"(//input[@id='autocomplete'])[1]").send_keys("Bd. Magheru nr.1")
+# sleep(3)
+# chrome.find_element(By.XPATH,"//input[@id='locality']").send_keys("Bucuresti")
+# sleep(3)
+# chrome.find_element(By.XPATH,"//input[@id='country']").send_keys("Romania")
+# sleep(3)
+# optiune_sau=chrome.find_element(By.XPATH, "//input[@id='street_number'] | //input[@id='route']")
+# optiune_sau.clear()
+# sleep(3)
+# optiune_sau.send_keys('Bd. Iuliu Maniu')
+# sleep(3)
+
+
+# chrome.get('https://www.phptravels.net')
+# chrome.find_element(By.ID,'cookie_stop').click()
+# sleep(3)
+# offers_button=chrome.find_element(By.XPATH,'//a[text()="View Offers"]')
+# sleep(3)
+# offers_button.send_keys('\n')
+# sleep(3)
+
+
+# chrome.get('http://automationpractice.com/index.php')
+# chrome.find_element(By.XPATH,"//a[text()='Contact us']").click()
+# sleep(3)
+# chrome.find_element(By.XPATH,"//a[text()='Best Sellers']").click()
+# sleep(3)
+# chrome.find_element(By.XPATH,"(//a[text()='T-shirts'])[2]").click()
+# sleep(3)
+# chrome.find_element(By.XPATH,"//a[contains(text(),'Contact')]").click()
+# sleep(3)
+# continut_text=chrome.find_element(By.XPATH,"//a[contains(text(),'Contact')]").text
+# assert continut_text == 'Contact Us' , 'Textul nu coincide'  # daca scriu "us" cu litera mica testul este ok
+
+
+# chrome.get('https://formy-project.herokuapp.com/form')
+# element_parinte=chrome.find_element(By.XPATH,'//input[@id="radio-button-1"]/parent::div/parent::div[@class="input-group"]')
+# sleep(3)
+# element_parinte.is_enabled()
+# sleep(3)
+# element_copil=chrome.find_element(By.XPATH,'//input[@id="radio-button-1"]/parent::div/following-sibling::*[1]')
+# # sau //input[@id="radio-button-1"]/parent::div/following-sibling::div/input[@id="radio-button-2"]
+# sleep(3)
+# element_copil.is_enabled()
+# sleep(3)
+
+
+# chrome.get('https://formy-project.herokuapp.com/autocomplete')
+# def formy_autocomplete_by_placeholder(placeholder_text, input_value):
+#     input=chrome.find_element(By.XPATH, f'//input[@placeholder="{placeholder_text}"]')
+#     sleep(3)
+#     input.clear()
+#     input.send_keys(input_value)
+#     sleep(3)
 #
-# # /html/body/section[6]/div[2]/div/div/div/div/div/a
-# chrome.find_element(By.XPATH,'/html/body/section[6]/div[2]/div/div/div/div/div/a').send_keys('i')
-# sleep(3)
+# formy_autocomplete_by_placeholder("Street address", "Str. Unirii")
+# chrome.quit()
 
 
-# chrome.get('https://www.phptravels.net/contact')
-# sleep(3)
-# # //*[@id="fadein"]/section[2]/div/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div/input
-# # /html/body/section[2]/div/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div/input
-# chrome.find_element(By.XPATH,'/html/body/section[2]/div/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div/input').send_keys('Ana')
-# sleep(3)
+
+
+
+
+
+
